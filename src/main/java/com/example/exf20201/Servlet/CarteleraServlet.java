@@ -1,6 +1,7 @@
 package com.example.exf20201.Servlet;
 
 import com.example.exf20201.Beans.Cartelera;
+import com.example.exf20201.Beans.Empleado;
 import com.example.exf20201.Dao.CarteleraDao;
 import com.example.exf20201.Dao.CineDao;
 import com.example.exf20201.Dao.PeliculaDao;
@@ -17,6 +18,8 @@ public class CarteleraServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        Empleado empleado = (Empleado) session.getAttribute("empleado");
 
         String action = request.getParameter("action") != null ? request.getParameter("action") : "lista";
         RequestDispatcher view;
@@ -29,13 +32,13 @@ public class CarteleraServlet extends HttpServlet {
             view = request.getRequestDispatcher("cartelera/lista.jsp");
             view.forward(request, response);
 
-        }else if(action.equalsIgnoreCase("agregar")){
+        }else if(action.equalsIgnoreCase("agregar") && (empleado.getRoles().get(0).getNombre().equals("gestor") || empleado.getRoles().get(0).getNombre().equals("admin"))){
             request.setAttribute("listaPeliculas",peliculaDao.listaPeliculas());
             request.setAttribute("listaCine",cineDao.listaCines());
             view = request.getRequestDispatcher("cartelera/agregarFuncion.jsp");
             view.forward(request, response);
 
-        }else if(action.equalsIgnoreCase("borrar")){
+        }else if(action.equalsIgnoreCase("borrar")&& (empleado.getRoles().get(0).getNombre().equals("gestor") || empleado.getRoles().get(0).getNombre().equals("admin"))){
             String idFuncionStr = request.getParameter("idFuncion");
             int idFuncion = Integer.parseInt(idFuncionStr);
 
@@ -44,7 +47,7 @@ public class CarteleraServlet extends HttpServlet {
             view = request.getRequestDispatcher("cartelera/lista.jsp");
             view.forward(request, response);
 
-        }else if(action.equalsIgnoreCase("editar")){
+        }else if(action.equalsIgnoreCase("editar")&& (empleado.getRoles().get(0).getNombre().equals("gestor") || empleado.getRoles().get(0).getNombre().equals("admin"))){
             String idFuncionStr = request.getParameter("idFuncion");
             int idFuncion = Integer.parseInt(idFuncionStr);
 
