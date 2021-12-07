@@ -46,13 +46,19 @@ public class CarteleraDao extends DaoBase{
     }
 
     public void borrarFuncion(int idCartelera){
-
-
-
+        String sql = "delete from cartelera  where idcartelera = ?";
+        Cartelera cartelera = new Cartelera();
+        try (Connection connection = this.getConection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)){
+            pstmt.setInt(1,idCartelera);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public Cartelera obtenerCarteleraPorId(int idFuncion){
-        String sql = "select * from cadena where idcartelera = ?";
+        String sql = "select * from cartelera where idcartelera = ?";
         Cartelera cartelera = new Cartelera();
         try (Connection connection = this.getConection();
              PreparedStatement pstmt = connection.prepareStatement(sql)){

@@ -40,7 +40,7 @@ public class CarteleraServlet extends HttpServlet {
             int idFuncion = Integer.parseInt(idFuncionStr);
 
             carteleraDao.borrarFuncion(idFuncion);
-
+            request.setAttribute("listaCartelera",carteleraDao.listaCartelera());
             view = request.getRequestDispatcher("cartelera/lista.jsp");
             view.forward(request, response);
 
