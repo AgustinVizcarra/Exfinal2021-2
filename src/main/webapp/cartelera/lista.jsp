@@ -28,7 +28,7 @@
             <jsp:include page="../includes/infoMsgs.jsp"/>
             <table class="table">
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th>#</th>
                         <th>Cadena</th>
                         <th>Cine</th>
@@ -68,10 +68,15 @@
                                 <%}%>
                             </span>
                         </td>
+                        <td>
+                            <span><%=cartelera.getHorario()%></span>
+                        </td>
                         <td></td>
                         <td></td>
                     </tr>
-                <%}%>
+                <%
+                    i++;
+                    }%>
                 </tbody>
             </table>
             <jsp:include page="../includes/footer.jsp"/>
