@@ -1,28 +1,30 @@
 package com.example.exf20201.Dao;
 
+import com.example.exf20201.Beans.Cadena;
 import com.example.exf20201.Beans.Cine;
-import com.example.exf20201.Beans.Pelicula;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PeliculaDao extends DaoBase{
-    public Pelicula peliculaPorID(int idPelicula){
-        String sql = "select * from pelicula where idpelicula = ?";
-        Pelicula pelicula = new Pelicula();
+public class CadenaDao extends DaoBase{
+    public Cadena cadenaPorID(int idCadena){
+        String sql = "select * from cadena where idcadena = ?";
+        Cadena cadena = new Cadena();
         try (Connection connection = this.getConection();
              PreparedStatement pstmt = connection.prepareStatement(sql)){
-            pstmt.setInt(1,idPelicula);
+            pstmt.setInt(1,idCadena);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
-                pelicula.setIdPelicula(rs.getInt(1));
-                pelicula.setNombre(rs.getString(2));
+                cadena.setIdCadena(rs.getInt(1));
+                cadena.setRazonSocial(rs.getString(2));
+                cadena.setNombreComercial(rs.getString(3));
+                cadena.setRuc(rs.getString(4));
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return pelicula;
+        return cadena;
     }
 }

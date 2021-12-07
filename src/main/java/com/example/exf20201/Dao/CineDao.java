@@ -1,42 +1,32 @@
 package com.example.exf20201.Dao;
 
-import com.example.exf20201.Beans.Cadena;
+import com.example.exf20201.Beans.Cartelera;
 import com.example.exf20201.Beans.Cine;
-import com.example.exf20201.Beans.Pelicula;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.sql.*;
 
 public class CineDao extends DaoBase{
-
-    public ArrayList<Cine> listaCines(){
-        ArrayList<Cine> listaCines = new ArrayList<>();
-        String sentenciaSQL = "SELECT * FROM movies.cine;";
-
+    public Cine cinePorID(int idCine){
+        String sql = "select * from cine where idcine = ?";
+        Cine cine = new Cine();
         try (Connection connection = this.getConection();
-             Statement statement = connection.createStatement();
-             ResultSet rs = statement.executeQuery(sentenciaSQL)) {
+             PreparedStatement pstmt = connection.prepareStatement(sql)){
+            pstmt.setInt(1,idCine);
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
-                Cine cine = new Cine();
                 cine.setIdCine(rs.getInt(1));
                 cine.setNombre(rs.getString(2));
-
-                Cadena cadena = new Cadena();
-                cadena.setIdCadena(rs.getInt(3));
-
-                cine.setCadena(cadena);
-
-                listaCines.add(cine);
-
+                CadenaDao cadenaDao = new CadenaDao();
+                cine.setCadena(cadenaDao.cadenaPorID(rs.getInt(3)));
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
 
-        return listaCines;
+        return cine;
 
     }
+
+
+
 }
