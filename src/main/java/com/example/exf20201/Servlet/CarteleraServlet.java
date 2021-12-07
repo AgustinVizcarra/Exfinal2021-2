@@ -1,5 +1,7 @@
 package com.example.exf20201.Servlet;
 
+import com.example.exf20201.Beans.Cartelera;
+import com.example.exf20201.Dao.CarteleraDao;
 import com.example.exf20201.Dao.CineDao;
 import com.example.exf20201.Dao.PeliculaDao;
 
@@ -18,28 +20,34 @@ public class CarteleraServlet extends HttpServlet {
 
         String action = request.getParameter("action") != null ? request.getParameter("action") : "lista";
         RequestDispatcher view;
-
+        CarteleraDao carteleraDao = new CarteleraDao();
+        PeliculaDao peliculaDao = new PeliculaDao();
+        CineDao cineDao = new CineDao();
         if(action.equalsIgnoreCase("lista")){
             //listas a enviar
             view = request.getRequestDispatcher("cartelera/lista.jsp");
             view.forward(request, response);
 
         }else if(action.equalsIgnoreCase("agregar")){
-            PeliculaDao peliculaDao = new PeliculaDao();
-            CineDao cineDao = new CineDao();
-
             request.setAttribute("listaPeliculas",peliculaDao.listaPeliculas());
             request.setAttribute("listaCine",cineDao.listaCines());
             view = request.getRequestDispatcher("cartelera/agregarFuncion.jsp");
             view.forward(request, response);
 
         }else if(action.equalsIgnoreCase("borrar")){
+            String idFuncionStr = request.getParameter("idFuncion");
+            int idFuncion = Integer.parseInt(idFuncionStr);
 
+            carteleraDao.borrarFuncion(idFuncion);
 
-
+            view = request.getRequestDispatcher("cartelera/lista.jsp");
+            view.forward(request, response);
 
         }else if(action.equalsIgnoreCase("editar")){
+            String idFuncionStr = request.getParameter("idFuncion");
+            int idFuncion = Integer.parseInt(idFuncionStr);
 
+            Cartelera cartelera = obtenerCarteleraPorId(idFuncion);
 
 
         }
@@ -50,6 +58,7 @@ public class CarteleraServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+        HttpSession session = request.getSession();
 
         if(action.equalsIgnoreCase("agregar")){
             String idPeliculaStr = request.getParameter("idPelicula");
@@ -61,14 +70,19 @@ public class CarteleraServlet extends HttpServlet {
             String formatoStr = request.getParameter("formato");
             int formato = Integer.parseInt(formatoStr);
 
-            String lenguaje = request.getParameter("lenguaje");
+            String lenguajeStr = request.getParameter("lenguaje");
+
             String horario = request.getParameter("horario");
 
 
+            CarteleraDao carteleraDao = new CarteleraDao();
+            carteleraDao.agregarFuncion(idPelicula,idCine,formato,lenguajeStr,horario);
 
-
-
+            session.setAttribute("msg","Guardado exitoso");
+            response.sendRedirect(request.getContextPath() + "/Cartelera");
         }
+
+
 
 
 

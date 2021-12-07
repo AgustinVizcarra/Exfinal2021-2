@@ -38,7 +38,28 @@ public class CarteleraDao extends DaoBase{
 
     }
 
-    //public void agregarFuncion(int idPelicula,int idCine, int 3D,)
+    public void agregarFuncion(int idPelicula,int idCine, int es3D,String lenguaje, String horario){
+
+
+
+
+
+
+    }
+
+    public void borrarFuncion(int idCartelera){
+
+
+
+    }
+
+    public Cartelera obtenerCarteleraPorId(int idFuncion){
+        Cartelera cartelera = null;
+
+
+
+        return  cartelera;
+    }
 
 
 }
