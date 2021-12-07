@@ -17,6 +17,7 @@ public class CarteleraServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
 
         String action = request.getParameter("action") != null ? request.getParameter("action") : "lista";
         RequestDispatcher view;

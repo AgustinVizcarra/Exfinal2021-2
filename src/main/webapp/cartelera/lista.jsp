@@ -1,8 +1,11 @@
 <%@ page import="com.example.exf20201.Beans.Cartelera" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.exf20201.Beans.Empleado" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%
     ArrayList<Cartelera> listaCartelera = (ArrayList<Cartelera>) request.getAttribute("listaCartelera");
+    HttpSession session1 = request.getSession();
+    Empleado empleado = (Empleado) session1.getAttribute("empleado");
 %>
 
 
@@ -22,9 +25,11 @@
                     <h1>Lista de empleados</h1>
                 </div>
             </div>
+            <%if (empleado.getRoles().get(0).getNombre().equals("gestor") || empleado.getRoles().get(0).getNombre().equals("admin") ){%>
             <div class="col-md-5 col-lg-4 ms-auto my-auto text-md-end">
                 <a href="<%= request.getContextPath()%>/Cartelera?action=agregar" class="btn btn-primary">Añadir Funcion</a>
             </div>
+            <%}%>
             <jsp:include page="../includes/infoMsgs.jsp"/>
             <table class="table">
                 <thead>
@@ -71,8 +76,20 @@
                         <td>
                             <span><%=cartelera.getHorario()%></span>
                         </td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <%if (empleado.getRoles().get(0).getNombre().equals("gestor") || empleado.getRoles().get(0).getNombre().equals("admin") ){%>
+                            <div class="col-md-5 col-lg-4 ms-auto my-auto text-md-end">
+                                <a href="<%= request.getContextPath()%>/Cartelera?action=agregar" class="btn btn-primary">Añadir Funcion</a>
+                            </div>
+                            <%}%>
+                        </td>
+                        <td>
+                            <%if (empleado.getRoles().get(0).getNombre().equals("gestor") || empleado.getRoles().get(0).getNombre().equals("admin") ){%>
+                            <div class="col-md-5 col-lg-4 ms-auto my-auto text-md-end">
+                                <a href="<%= request.getContextPath()%>/Cartelera?action=agregar" class="btn btn-primary">Añadir Funcion</a>
+                            </div>
+                            <%}%>
+                        </td>
                     </tr>
                 <%
                     i++;
