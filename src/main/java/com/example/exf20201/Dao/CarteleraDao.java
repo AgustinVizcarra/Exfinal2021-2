@@ -21,6 +21,13 @@ public class CarteleraDao extends DaoBase{
                 Cartelera cartelera = new Cartelera();
                 cartelera.setIdCartelera(rs.getInt(1));
                 PeliculaDao peliculaDao = new PeliculaDao();
+                cartelera.setPelicula(peliculaDao.peliculaPorID(rs.getInt(2)));
+                CineDao cineDao = new CineDao();
+                cartelera.setCine(cineDao.cinePorID(rs.getInt(3)));
+                cartelera.setTresD(rs.getInt(4));
+                cartelera.setDoblada(rs.getInt(5));
+                cartelera.setSubtitulada(rs.getInt(6));
+                cartelera.setHorario(rs.getString(7));
                 listaCartelera.add(cartelera);
             }
         }catch (SQLException e){
