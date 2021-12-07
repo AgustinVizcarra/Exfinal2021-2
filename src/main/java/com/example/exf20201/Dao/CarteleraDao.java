@@ -38,10 +38,19 @@ public class CarteleraDao extends DaoBase{
 
     public void agregarFuncion(int idPelicula,int idCine, int es3D,String lenguaje, String horario){
 
-
-
-
-
+        String sql = "insert into cartelera() values (?,?,?,?,?)";
+        Cartelera cartelera = new Cartelera();
+        try (Connection connection = this.getConection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)){
+            pstmt.setInt(1,idPelicula);
+            pstmt.setInt(2,idCine);
+            pstmt.setInt(3,es3D);
+            pstmt.setString(4,lenguaje);
+            pstmt.setString(5,horario);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
     }
 
