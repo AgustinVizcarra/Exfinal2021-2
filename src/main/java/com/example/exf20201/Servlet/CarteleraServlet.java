@@ -25,6 +25,7 @@ public class CarteleraServlet extends HttpServlet {
         CineDao cineDao = new CineDao();
         if(action.equalsIgnoreCase("lista")){
             //listas a enviar
+            request.setAttribute("listaCartelera",carteleraDao.listaCartelera());
             view = request.getRequestDispatcher("cartelera/lista.jsp");
             view.forward(request, response);
 
