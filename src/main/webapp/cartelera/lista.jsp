@@ -79,7 +79,7 @@
                         <td>
                             <%if (empleado.getRoles().get(0).getNombre().equals("gestor") || empleado.getRoles().get(0).getNombre().equals("admin") ){%>
                             <div class="col-md-5 col-lg-4 ms-auto my-auto text-md-end">
-                                <a href="<%= request.getContextPath()%>/Cartelera?action=agregar" class="btn btn-primary">Añadir Funcion</a>
+                                <a href="<%= request.getContextPath()%>/Cartelera?action=agregar" class="btn btn-primary">Editar Funcion</a>
                             </div>
                             <%}%>
                         </td>
