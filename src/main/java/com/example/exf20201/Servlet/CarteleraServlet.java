@@ -47,7 +47,7 @@ public class CarteleraServlet extends HttpServlet {
             String idFuncionStr = request.getParameter("idFuncion");
             int idFuncion = Integer.parseInt(idFuncionStr);
 
-            Cartelera cartelera = obtenerCarteleraPorId(idFuncion);
+            Cartelera cartelera = carteleraDao.obtenerCarteleraPorId(idFuncion);
 
 
         }

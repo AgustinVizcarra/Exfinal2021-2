@@ -1,11 +1,9 @@
 package com.example.exf20201.Dao;
 
+import com.example.exf20201.Beans.Cadena;
 import com.example.exf20201.Beans.Cartelera;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class CarteleraDao extends DaoBase{
@@ -54,11 +52,27 @@ public class CarteleraDao extends DaoBase{
     }
 
     public Cartelera obtenerCarteleraPorId(int idFuncion){
-        Cartelera cartelera = null;
-
-
-
-        return  cartelera;
+        String sql = "select * from cadena where idcartelera = ?";
+        Cartelera cartelera = new Cartelera();
+        try (Connection connection = this.getConection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)){
+            pstmt.setInt(1,idFuncion);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                cartelera.setIdCartelera(rs.getInt(1));
+                PeliculaDao peliculaDao = new PeliculaDao();
+                cartelera.setPelicula(peliculaDao.peliculaPorID(rs.getInt(2)));
+                CineDao cineDao = new CineDao();
+                cartelera.setCine(cineDao.cinePorID(rs.getInt(3)));
+                cartelera.setTresD(rs.getInt(4));
+                cartelera.setDoblada(rs.getInt(5));
+                cartelera.setSubtitulada(rs.getInt(6));
+                cartelera.setHorario(rs.getString(7));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return cartelera;
     }
 
 
