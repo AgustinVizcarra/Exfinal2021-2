@@ -15,6 +15,9 @@
                     <h1>Lista de empleados</h1>
                 </div>
             </div>
+            <div class="col-md-5 col-lg-4 ms-auto my-auto text-md-end">
+                <a href="<%= request.getContextPath()%>/Cartelera?action=agregar" class="btn btn-primary">Añadir Funcion</a>
+            </div>
             <jsp:include page="../includes/infoMsgs.jsp"/>
             <table class="table">
                 <thead>

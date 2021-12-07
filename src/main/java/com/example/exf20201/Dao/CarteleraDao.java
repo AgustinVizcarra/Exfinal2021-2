@@ -31,5 +31,7 @@ public class CarteleraDao extends DaoBase{
 
     }
 
+    //public void agregarFuncion(int idPelicula,int idCine, int 3D,)
+
 
 }
