@@ -25,11 +25,11 @@
             <li class="nav-item">
                 <span class="nav-link text-dark">
                     Bienvenido <%=empleado.getNombre()%> <%=empleado.getApellido()%> Rol:<%=empleado.getRoles().get(0).getNombre()%> (<a
-                        href="<%=request.getContextPath()%>/Login?action=logout">Cerrar sesion</a>)
+                        href="<%=request.getContextPath()%>/?action=logout">Cerrar sesion</a>)
                 </span>
             </li>
             <% } else { %>
-            <a class="nav-link" style="color: #007bff;" href="<%=request.getContextPath()%>/Login">(Iniciar
+            <a class="nav-link" style="color: #007bff;" href="<%=request.getContextPath()%>/">(Iniciar
                 Sesion)</a>
             <% } %>
         </ul>

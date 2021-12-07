@@ -1,4 +1,7 @@
+<%@ page import="java.util.ArrayList" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%ArrayList<Integer> estadisticas= (ArrayList<Integer>) request.getAttribute("estadisticas");%>
+<%String cineMax = (String) request.getAttribute("cineMax");%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,11 +20,19 @@
                 </div>
             </div>
             <table class="table">
-                <tr>
-                    <th>#empleados sin jefe</th>
-                    <th># pelis en 3D</th>
-                    <th>salario mayor a 9700</th>
+                <tr class="text-center">
+                    <th># Empleados sin jefe</th>
+                    <th># Pelis en 3D</th>
+                    <th># Cines salario mayor a 9700</th>
                     <th>Cine con mayor # de pelis</th>
+                </tr>
+                <tr>
+                    <%for(int estadistica: estadisticas){%>
+                    <td class="text-center">
+                        <%=estadistica%>
+                    </td>
+                    <%}%>
+                    <td class="text-center"><%=cineMax%></td>
                 </tr>
             </table>
         </div>
