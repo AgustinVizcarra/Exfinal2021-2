@@ -7,8 +7,9 @@
     </head>
     <body class="text-center">
         <main class="form-signin">
-            <form method="post" action="<%=request.getContextPath()%>/Login">
-                <h1 class="h3 mb-3 fw-normal">Por favor loguearse</h1>
+            <form method="post" action="<%=request.getContextPath()%>/">
+                <h1 class="h3 mb-3 fw-normal"><u>Examen Final 2021-2</u></h1>
+                <h1 class="h3 mb-3 fw-normal">Loguin</h1>
                 <div class="form-floating">
                     <input type="text" class="form-control" id="floatingInput" name="inputEmail"
                            placeholder="name@example.com">
@@ -26,6 +27,12 @@
                 </div>
                 <%} %>
             </form>
+            <p></p>
+            <p></p>
+            <h5 class="h5 mb-3 fw-normal"><u>Grupo 5</u></h5>
+            <h6 class="h6 mb-3 fw-normal">Agustin Vizcarra 20181454</h6>
+            <h6 class="h6 mb-3 fw-normal">Ronny Pastor 	20185534</h6>
+            <h6 class="h6 mb-3 fw-normal">Alonso Rosales 20191566</h6>
         </main>
         <jsp:include page="../includes/footer.jsp"/>
     </body>
